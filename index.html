@@ -5,9 +5,23 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app">
-        <p>{{ coins }}</p>
+    <div id="app" style="margin: 0 auto; padding-top: 100px; left: 50%">
+        <h1>{{ coinsDisplayed }} hackercoinz</h1>
+        <h3>{{ coinsPerSecond }} Per second</h3>
         <button v-on:click="hackButtonPressed">HACK!</button>
+
+        <div style="width: 300px; border: 2px solid darkred; margin: 0 auto; background-color: seagreen">
+            <h4>Upgrade store</h4>
+            <h5 style="padding-bottom: 10px">Hover over item for info</h5>
+            <h4 v-for="upgrade in upgrades" >
+                <div v-if="upgrade.visible">
+                    <p v-bind:title="upgrade.description">{{ upgrade.name }}: You have: {{ upgrade.amount }}</p>
+                    <button :disabled="coinsDisplayed <= upgrade.price" v-on:click="buyUpgrade(upgrade.index)">Price: {{ upgrade.price }}</button>
+                </div>
+            </h4>
+
+        </div>
+
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
